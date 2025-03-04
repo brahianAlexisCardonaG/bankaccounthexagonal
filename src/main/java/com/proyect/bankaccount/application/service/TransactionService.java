@@ -1,6 +1,6 @@
 package com.proyect.bankaccount.application.service;
 
-import com.proyect.bankaccount.domain.model.Transaction;
+import com.proyect.bankaccount.domain.model.transaction.Transaction;
 import com.proyect.bankaccount.domain.ports.in.transaction.CreateTransactionUseCase;
 
 public class TransactionService implements CreateTransactionUseCase {

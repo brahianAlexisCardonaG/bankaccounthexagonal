@@ -1,8 +1,8 @@
 package com.proyect.bankaccount.application.service;
 
-import com.proyect.bankaccount.domain.model.Account;
 import com.proyect.bankaccount.domain.ports.in.account.CreateAccountUseCase;
 import com.proyect.bankaccount.domain.ports.in.account.GetAccountUseCase;
+import com.proyect.bankaccount.domain.model.account.Account;
 import java.util.List;
 import java.util.Optional;
 

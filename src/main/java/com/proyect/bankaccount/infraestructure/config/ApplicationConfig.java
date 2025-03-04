@@ -1,7 +1,10 @@
 package com.proyect.bankaccount.infraestructure.config;
 
+import com.proyect.bankaccount.application.mapper.account.IAccountMapperAccountBasicAccount;
+import com.proyect.bankaccount.application.mapper.client.IClientMapperClientBasicClient;
 import com.proyect.bankaccount.application.service.AccountService;
 import com.proyect.bankaccount.application.service.ClientService;
+import com.proyect.bankaccount.application.service.MessageService;
 import com.proyect.bankaccount.application.service.TransactionService;
 import com.proyect.bankaccount.application.usecase.account.CreateAccountUseCaseImpl;
 import com.proyect.bankaccount.application.usecase.account.GetAccountUseCaseImpl;
@@ -25,28 +28,39 @@ public class ApplicationConfig {
     @Bean
     public AccountService accountService(AccountRepositoryPort accountRepositoryPort
                                          , ClientRepositoryPort clientRepositoryPort
+                                         , MessageService messageService
+                                         ,IClientMapperClientBasicClient clientMapperClientBasicClient
     ) {
         return new AccountService(
-                new CreateAccountUseCaseImpl(accountRepositoryPort,clientRepositoryPort),
-                new GetAccountUseCaseImpl(accountRepositoryPort)
+                new CreateAccountUseCaseImpl(accountRepositoryPort,clientRepositoryPort, messageService, clientMapperClientBasicClient),
+                new GetAccountUseCaseImpl(accountRepositoryPort, messageService)
         );
     }
 
     @Bean
-    public ClientService clientService(ClientRepositoryPort clientRepositoryPort) {
+    public ClientService clientService(ClientRepositoryPort clientRepositoryPort
+                                       , MessageService messageService
+    ) {
         return new ClientService(
-                new CreateClientUseCaseImpl(clientRepositoryPort),
-                new GetClientUseCaseImpl(clientRepositoryPort)
-        );
+                new CreateClientUseCaseImpl(clientRepositoryPort, messageService),
+                new GetClientUseCaseImpl(clientRepositoryPort, messageService),
+                messageService);
     }
 
     @Bean
     public TransactionService transactionService(TransactionRepositoryPort transactionRepositoryPort
-                                                 ,AccountRepositoryPort accountRepositoryPort
+                                                 , AccountRepositoryPort accountRepositoryPort
                                                  , ClientRepositoryPort clientRepositoryPort
+                                                 , MessageService messageService
+                                                 , IAccountMapperAccountBasicAccount accountMapperAccountBasicAccount
     ) {
         return new TransactionService(
-                new CreateTransactionUseCaseImpl(transactionRepositoryPort, accountRepositoryPort, clientRepositoryPort)
+                new CreateTransactionUseCaseImpl(transactionRepositoryPort,
+                        accountRepositoryPort,
+                        clientRepositoryPort,
+                        messageService,
+                        accountMapperAccountBasicAccount
+                )
         );
     }
 

@@ -1,6 +1,6 @@
 package com.proyect.bankaccount.infraestructure.mapper;
 
-import com.proyect.bankaccount.domain.model.Transaction;
+import com.proyect.bankaccount.domain.model.transaction.Transaction;
 import com.proyect.bankaccount.infraestructure.entities.TransactionEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -9,6 +9,5 @@ import org.mapstruct.Mapping;
 public interface ITransactionMapperEntityDomain {
     TransactionEntity toTransctionEntity(Transaction transaction);
 
-    @Mapping(target = "account.client", ignore = true)
     Transaction toTransaction(TransactionEntity transactionEntity);
 }

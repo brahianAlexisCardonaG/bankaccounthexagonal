@@ -1,8 +1,8 @@
 package com.proyect.bankaccount.infraestructure.controllers.transaction;
 
-import com.proyect.bankaccount.application.mapper.ITransactionMapperRequestDomain;
+import com.proyect.bankaccount.application.mapper.transaction.ITransactionMapperRequestDomain;
 import com.proyect.bankaccount.application.service.TransactionService;
-import com.proyect.bankaccount.domain.model.Transaction;
+import com.proyect.bankaccount.domain.model.transaction.Transaction;
 import com.proyect.bankaccount.infraestructure.controllers.transaction.request.TransactionRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +23,7 @@ public class TransactionController {
         this.transactionMapperRequestDomain = transactionMapperRequestDomain;
     }
 
-    @PostMapping("/create-transaction")
+    @PostMapping( value="/create-transaction", headers = "Accept=application/json")
     public ResponseEntity<String> save(@RequestBody TransactionRequest transactionRequest
                                        ,@RequestParam String identificationNumber
                                         ,@RequestParam String accountNumber

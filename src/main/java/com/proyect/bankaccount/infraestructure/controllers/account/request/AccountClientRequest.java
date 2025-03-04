@@ -4,64 +4,32 @@ import com.proyect.bankaccount.domain.model.enums.AccountType;
 import com.proyect.bankaccount.infraestructure.controllers.client.request.ClientRequest;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class AccountClientRequest {
 
+    @NotNull
+    @Size(min = 10, max = 20, message = "El número de cuenta debe tener entre 10 y 20 caracteres")
     private String accountNumber;
 
     @Enumerated(EnumType.STRING)
+    @NotNull
     private AccountType accountType;
 
+    @NotNull
+    @PositiveOrZero(message = "El saldo no puede ser negativo")
     private BigDecimal balance;
-
-    private LocalDate createdAt;
 
     private ClientRequest client;
 
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
-
-    public AccountType getAccountType() {
-        return accountType;
-    }
-
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
-    }
-
-    public BigDecimal getBalance() {
-        return balance;
-    }
-
-    public void setBalance(BigDecimal balance) {
-        this.balance = balance;
-    }
-
-    public LocalDate getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDate createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public ClientRequest getClient() {
-        return client;
-    }
-
-    public void setClient(ClientRequest client) {
-        this.client = client;
-    }
 }

@@ -1,12 +1,13 @@
 package com.proyect.bankaccount.infraestructure.repositories;
 
-import com.proyect.bankaccount.domain.model.Account;
 import com.proyect.bankaccount.domain.ports.out.AccountRepositoryPort;
 import com.proyect.bankaccount.infraestructure.entities.AccountEntity;
+import com.proyect.bankaccount.domain.model.account.Account;
 import com.proyect.bankaccount.infraestructure.mapper.IAccountMapperEntityDomain;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +28,6 @@ public class JpaAccountRepositoryAdapter implements AccountRepositoryPort {
     @Override
     public Optional<Account> findByAccountNumber(String accountNumber) {
         Optional<AccountEntity> findAccount = jpaAccountRepository.findByAccountNumber(accountNumber);
-        /*findAccount.get().getClient().setAccount(null);
-        findAccount.get().getTransactions().stream().forEach(transaction -> transaction.setAccount(null));*/
         return findAccount.map(accountMapper::toAccount);
     }
 
@@ -57,4 +56,14 @@ public class JpaAccountRepositoryAdapter implements AccountRepositoryPort {
                 .map(accountMapper::toAccount)
                 .toList();
     }
+
+    @Override
+    public Account updateBalance(Long id, BigDecimal balance) {
+        Optional<AccountEntity> optionalAccount = jpaAccountRepository.findById(id);
+        AccountEntity accountEntity = optionalAccount.get();
+        accountEntity.setBalance(balance);
+        AccountEntity updatedAccount = jpaAccountRepository.save(accountEntity);
+        return accountMapper.toAccount(updatedAccount);
+    }
+
 }

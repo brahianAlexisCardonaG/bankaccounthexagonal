@@ -1,10 +1,9 @@
 package com.proyect.bankaccount.infraestructure.controllers.client;
 
-import com.proyect.bankaccount.application.mapper.IClientMapperRequestDomain;
-import com.proyect.bankaccount.application.mapper.IClientMapperResponseDomain;
+import com.proyect.bankaccount.application.mapper.client.IClientMapperRequestDomain;
+import com.proyect.bankaccount.application.mapper.client.IClientMapperResponseDomain;
 import com.proyect.bankaccount.application.service.ClientService;
-import com.proyect.bankaccount.domain.model.Account;
-import com.proyect.bankaccount.domain.model.Client;
+import com.proyect.bankaccount.domain.model.client.Client;
 import com.proyect.bankaccount.infraestructure.controllers.client.request.ClientRequest;
 import com.proyect.bankaccount.infraestructure.controllers.client.response.ClientAccountResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class ClientController {
     }
 
 
-    @PostMapping("/create-client")
+    @PostMapping(value="/create-client", headers = "Accept=application/json")
     public ResponseEntity<ClientRequest> save(@RequestBody ClientRequest ClientRequest) {
         Client client = clientMapperRequestDomain.toClient(ClientRequest);
         Client createdClient = clientService.createClient(client);

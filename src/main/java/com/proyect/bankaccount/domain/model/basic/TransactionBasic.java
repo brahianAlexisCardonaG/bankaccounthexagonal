@@ -1,6 +1,6 @@
-package com.proyect.bankaccount.infraestructure.controllers.account.response;
+package com.proyect.bankaccount.domain.model.basic;
 
-import com.proyect.bankaccount.domain.model.enums.AccountType;
+import com.proyect.bankaccount.domain.model.enums.TransactionType;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
@@ -13,17 +13,17 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class AccountResponse {
+public class TransactionBasic {
 
     private Long id;
 
-    private String accountNumber;
-
     @Enumerated(EnumType.STRING)
-    private AccountType accountType;
+    private TransactionType transactionType;
 
-    private BigDecimal balance;
+    private BigDecimal amount;
 
-    private LocalDate createdAt;
+    private LocalDate transactionDate;
+
+    private String description;
 
 }

@@ -1,5 +1,7 @@
-package com.proyect.bankaccount.infraestructure.controllers.account.response;
+package com.proyect.bankaccount.domain.model.account;
 
+import com.proyect.bankaccount.domain.model.basic.ClientBasic;
+import com.proyect.bankaccount.domain.model.basic.TransactionBasic;
 import com.proyect.bankaccount.domain.model.enums.AccountType;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -9,11 +11,12 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.List;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Data
-public class AccountResponse {
+public class Account {
 
     private Long id;
 
@@ -25,5 +28,9 @@ public class AccountResponse {
     private BigDecimal balance;
 
     private LocalDate createdAt;
+
+    private ClientBasic client;
+
+    private List<TransactionBasic> transactions;
 
 }

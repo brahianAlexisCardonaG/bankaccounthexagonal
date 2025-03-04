@@ -1,4 +1,4 @@
-package com.proyect.bankaccount.infraestructure.controllers.account.response;
+package com.proyect.bankaccount.domain.model.basic;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -6,10 +6,12 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
-public class ClientResponse {
+public class ClientBasic {
+
+    private Long id;
 
     private String name;
 
@@ -20,5 +22,4 @@ public class ClientResponse {
     private String identificationNumber;
 
     private LocalDate createdAt;
-
 }

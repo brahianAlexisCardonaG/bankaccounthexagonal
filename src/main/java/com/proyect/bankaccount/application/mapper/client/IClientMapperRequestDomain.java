@@ -1,6 +1,6 @@
-package com.proyect.bankaccount.application.mapper;
+package com.proyect.bankaccount.application.mapper.client;
 
-import com.proyect.bankaccount.domain.model.Client;
+import com.proyect.bankaccount.domain.model.client.Client;
 import com.proyect.bankaccount.infraestructure.controllers.client.request.ClientRequest;
 import org.mapstruct.Mapper;
 

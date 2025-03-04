@@ -3,54 +3,31 @@ package com.proyect.bankaccount.infraestructure.controllers.transaction.request;
 import com.proyect.bankaccount.domain.model.enums.TransactionType;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class TransactionRequest {
 
+    @NotNull(message = "El tipo de transacción no puede ser nulo")
     @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
 
+    @NotNull(message = "El monto no puede ser nulo")
+    @Positive(message = "El monto debe ser un valor positivo")
     private BigDecimal amount;
 
-    private LocalDate transactionDate;
-
+    @NotBlank(message = "La descripción no puede estar vacía")
+    @Size(max = 255, message = "La descripción no puede superar los 255 caracteres")
     private String description;
 
-    public TransactionType getTransactionType() {
-        return transactionType;
-    }
-
-    public void setTransactionType(TransactionType transactionType) {
-        this.transactionType = transactionType;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public LocalDate getTransactionDate() {
-        return transactionDate;
-    }
-
-    public void setTransactionDate(LocalDate transactionDate) {
-        this.transactionDate = transactionDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

@@ -1,9 +1,9 @@
 package com.proyect.bankaccount.infraestructure.controllers.account;
 
-import com.proyect.bankaccount.application.mapper.IAccountMapperRequestDomain;
-import com.proyect.bankaccount.application.mapper.IAccountMapperResponseDomain;
+import com.proyect.bankaccount.application.mapper.account.IAccountMapperRequestDomain;
+import com.proyect.bankaccount.application.mapper.account.IAccountMapperResponseDomain;
 import com.proyect.bankaccount.application.service.AccountService;
-import com.proyect.bankaccount.domain.model.Account;
+import com.proyect.bankaccount.domain.model.account.Account;
 import com.proyect.bankaccount.infraestructure.controllers.account.request.AccountClientRequest;
 import com.proyect.bankaccount.infraestructure.controllers.account.response.AccountClientTransactionResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class AccountController {
         this.accountMapperResponseDomain = accountMapperResponseDomain;
     }
 
-    @PostMapping("/create-account")
+    @PostMapping(value = "/create-account", headers = "Accept=application/json")
     public ResponseEntity<String> save(@RequestBody AccountClientRequest accountClientRequest) {
         Account account = accountMapperRequestDomain.toAccount(accountClientRequest);
         accountService.createAccount(account);

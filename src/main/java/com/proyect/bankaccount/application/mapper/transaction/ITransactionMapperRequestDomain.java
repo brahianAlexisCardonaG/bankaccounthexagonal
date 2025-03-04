@@ -1,8 +1,6 @@
-package com.proyect.bankaccount.application.mapper;
+package com.proyect.bankaccount.application.mapper.transaction;
 
-import com.proyect.bankaccount.domain.model.Account;
-import com.proyect.bankaccount.domain.model.Transaction;
-import com.proyect.bankaccount.infraestructure.controllers.account.request.AccountClientRequest;
+import com.proyect.bankaccount.domain.model.transaction.Transaction;
 import com.proyect.bankaccount.infraestructure.controllers.transaction.request.TransactionRequest;
 import org.mapstruct.Mapper;
 

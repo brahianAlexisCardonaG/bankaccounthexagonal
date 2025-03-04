@@ -1,6 +1,6 @@
 package com.proyect.bankaccount.domain.ports.in.account;
 
-import com.proyect.bankaccount.domain.model.Account;
+import com.proyect.bankaccount.domain.model.account.Account;
 
 import java.util.List;
 import java.util.Optional;
